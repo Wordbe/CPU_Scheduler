@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "c:\\windows\\System32\\bash.exe",
+                "args": ["-c"]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "build on WSL",
+            "type": "shell",
+            "command": "gcc",
+            // "args": [
+            //     "-g",
+            //     "-o",
+            //     "/mnt/d/vscode/wsl/cpp/hello.out",
+            //     "hello.cpp"
+            // ],
+            "args": [
+                "-g",
+                
+                // files that you want to compile
+                // "/mnt/d/vscode/wsl/os/${fileBasename}",
+                "/mnt/d/vscode/wsl/os/*.c",
+
+                // object file (output file)
+                "-o",
+                "/mnt/d/vscode/wsl/os/${fileBasenameNoExtension}.out",
+                
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

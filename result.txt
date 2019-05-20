@@ -1,0 +1,1288 @@
+---------------------<Original queue list>---------------------
+process(1): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+process(2): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(3): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(8): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(9): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<FCFS schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(5) start
+       | pid(5) running
+ 24    +---------------- <-- pid(5) terminated
+ 24    +---------------- <-- pid(7) start
+       | pid(7) running
+ 27    +---------------- <-- pid(7) I/O start
+ 27    +---------------- <-- pid(4) start
+       | pid(4) running
+ 31    +---------------- <-- pid(4) I/O start
+ 31    +---------------- <-- pid(3) start
+       | pid(3) running
+ 32    +---------------- <-- pid(3) I/O start
+ 32    +---------------- <-- pid(6) start
+       | pid(6) running
+(36    |                 <-- pid(7) I/O completed)
+ 72    +---------------- <-- pid(6) terminated
+ 72    +---------------- <-- pid(9) start
+       | pid(9) running
+(51    |                 <-- pid(4) I/O completed)
+ 75    +---------------- <-- pid(9) terminated
+ 75    +---------------- <-- pid(2) start
+       | pid(2) running
+(53    |                 <-- pid(3) I/O completed)
+ 76    +---------------- <-- pid(2) I/O start
+ 76    +---------------- <-- pid(1) start
+       | pid(1) running
+ 78    +---------------- <-- pid(1) I/O start
+ 78    +---------------- <-- pid(7) start
+       | pid(7) running
+(79    |                 <-- pid(2) I/O completed)
+ 87    +---------------- <-- pid(7) terminated
+ 87    +---------------- <-- pid(4) start
+       | pid(4) running
+(86    |                 <-- pid(1) I/O completed)
+ 89    +---------------- <-- pid(4) terminated
+ 89    +---------------- <-- pid(3) start
+       | pid(3) running
+ 90    +---------------- <-- pid(3) terminated
+ 90    +---------------- <-- pid(2) start
+       | pid(2) running
+ 95    +---------------- <-- pid(2) terminated
+ 95    +---------------- <-- pid(1) start
+       | pid(1) running
+ 98    +---------------- <-- pid(1) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     5                22             10              10
+          3     6                68             28              28
+          4     9                71             68              68
+          5     7                84             72              21
+          6     4                86             80              24
+          7     3                87             85              28
+          8     2                89             83              69
+          9     1                92             87              70
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 67.78
+ Average waiting time: 57.00
+ Average response time: 35.33
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<NonPreemptive SJF schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(3) start
+       | pid(3) running
+ 13    +---------------- <-- pid(3) I/O start
+ 13    +---------------- <-- pid(9) start
+       | pid(9) running
+(15    |                 <-- pid(3) I/O completed)
+ 16    +---------------- <-- pid(9) terminated
+ 16    +---------------- <-- pid(3) start
+       | pid(3) running
+ 17    +---------------- <-- pid(3) terminated
+ 17    +---------------- <-- pid(1) start
+       | pid(1) running
+ 19    +---------------- <-- pid(1) I/O start
+ 19    +---------------- <-- pid(2) start
+       | pid(2) running
+ 20    +---------------- <-- pid(2) I/O start
+ 20    +---------------- <-- pid(4) start
+       | pid(4) running
+ 24    +---------------- <-- pid(4) I/O start
+ 24    +---------------- <-- pid(5) start
+       | pid(5) running
+(26    |                 <-- pid(1) I/O completed)
+ 36    +---------------- <-- pid(5) terminated
+ 36    +---------------- <-- pid(1) start
+       | pid(1) running
+(29    |                 <-- pid(2) I/O completed)
+ 39    +---------------- <-- pid(1) terminated
+ 39    +---------------- <-- pid(2) start
+       | pid(2) running
+(44    |                 <-- pid(4) I/O completed)
+ 44    +---------------- <-- pid(2) terminated
+ 44    +---------------- <-- pid(4) start
+       | pid(4) running
+ 46    +---------------- <-- pid(4) terminated
+ 46    +---------------- <-- pid(7) start
+       | pid(7) running
+ 49    +---------------- <-- pid(7) I/O start
+ 49    +---------------- <-- pid(6) start
+       | pid(6) running
+(58    |                 <-- pid(7) I/O completed)
+ 89    +---------------- <-- pid(6) terminated
+ 89    +---------------- <-- pid(7) start
+       | pid(7) running
+ 98    +---------------- <-- pid(7) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     9                12              9               9
+          3     3                14             12               9
+          4     5                34             22              22
+          5     1                33             28              11
+          6     2                38             32              13
+          7     4                43             37              17
+          8     6                85             45              45
+          9     7                95             83              43
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 40.56
+ Average waiting time: 29.78
+ Average response time: 18.78
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Preempiive SJF schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+ 3     +---------------- <-- pid(8) interrupted
+ 3     +---------------- <-- pid(3) start
+       | pid(3) running
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+ 4     +---------------- <-- pid(3) I/O start
+ 4     +---------------- <-- pid(9) start
+       | pid(9) running
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+(6     |                 <-- pid(3) I/O completed)
+ 7     +---------------- <-- pid(9) terminated
+ 7     +---------------- <-- pid(3) start
+       | pid(3) running
+ 8     +---------------- <-- pid(3) terminated
+ 8     +---------------- <-- pid(1) start
+       | pid(1) running
+ 10    +---------------- <-- pid(1) I/O start
+ 10    +---------------- <-- pid(4) start
+       | pid(4) running
+ 14    +---------------- <-- pid(4) I/O start
+ 14    +---------------- <-- pid(2) start
+       | pid(2) running
+ 15    +---------------- <-- pid(2) I/O start
+ 15    +---------------- <-- pid(8) start
+       | pid(8) running
+(17    |                 <-- pid(1) I/O completed)
+ 17    +---------------- <-- pid(8) interrupted
+ 17    +---------------- <-- pid(1) start
+       | pid(1) running
+ 20    +---------------- <-- pid(1) terminated
+ 20    +---------------- <-- pid(8) start
+       | pid(8) running
+ 27    +---------------- <-- pid(8) terminated
+ 27    +---------------- <-- pid(5) start
+       | pid(5) running
+(32    |                 <-- pid(4) I/O completed)
+ 32    +---------------- <-- pid(5) interrupted
+ 32    +---------------- <-- pid(4) start
+       | pid(4) running
+ 34    +---------------- <-- pid(4) terminated
+ 34    +---------------- <-- pid(5) start
+       | pid(5) running
+(35    |                 <-- pid(2) I/O completed)
+ 35    +---------------- <-- pid(5) interrupted
+ 35    +---------------- <-- pid(2) start
+       | pid(2) running
+ 40    +---------------- <-- pid(2) terminated
+ 40    +---------------- <-- pid(5) start
+       | pid(5) running
+ 46    +---------------- <-- pid(5) terminated
+ 46    +---------------- <-- pid(7) start
+       | pid(7) running
+ 49    +---------------- <-- pid(7) I/O start
+ 49    +---------------- <-- pid(6) start
+       | pid(6) running
+(58    |                 <-- pid(7) I/O completed)
+ 58    +---------------- <-- pid(6) interrupted
+ 58    +---------------- <-- pid(7) start
+       | pid(7) running
+ 67    +---------------- <-- pid(7) terminated
+ 67    +---------------- <-- pid(6) start
+       | pid(6) running
+ 98    +---------------- <-- pid(6) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     9                 3              0               0
+          2     3                 5              3               0
+          3     1                14              9               2
+          4     8                26             15               0
+          5     4                31             25               7
+          6     2                34             28               8
+          7     5                44             32              25
+          8     7                64             52              43
+          9     6                94             54              45
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 35.00
+ Average waiting time: 24.22
+ Average response time: 14.44
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Nonpreemptive Priority schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(6) start
+       | pid(6) running
+ 52    +---------------- <-- pid(6) terminated
+ 52    +---------------- <-- pid(7) start
+       | pid(7) running
+ 55    +---------------- <-- pid(7) I/O start
+ 55    +---------------- <-- pid(4) start
+       | pid(4) running
+ 59    +---------------- <-- pid(4) I/O start
+ 59    +---------------- <-- pid(9) start
+       | pid(9) running
+ 62    +---------------- <-- pid(9) terminated
+ 62    +---------------- <-- pid(3) start
+       | pid(3) running
+ 63    +---------------- <-- pid(3) I/O start
+ 63    +---------------- <-- pid(5) start
+       | pid(5) running
+(64    |                 <-- pid(7) I/O completed)
+ 75    +---------------- <-- pid(5) terminated
+ 75    +---------------- <-- pid(7) start
+       | pid(7) running
+(79    |                 <-- pid(4) I/O completed)
+ 84    +---------------- <-- pid(7) terminated
+ 84    +---------------- <-- pid(4) start
+       | pid(4) running
+(81    |                 <-- pid(3) I/O completed)
+ 86    +---------------- <-- pid(4) terminated
+ 86    +---------------- <-- pid(3) start
+       | pid(3) running
+ 87    +---------------- <-- pid(3) terminated
+ 87    +---------------- <-- pid(2) start
+       | pid(2) running
+ 88    +---------------- <-- pid(2) I/O start
+ 88    +---------------- <-- pid(1) start
+       | pid(1) running
+ 90    +---------------- <-- pid(1) I/O start
+       | idle
+(91    |                 <-- pid(2) I/O completed)
+ 91    +---------------- <-- pid(2) start
+       | pid(2) running
+ 96    +---------------- <-- pid(2) terminated
+       | idle
+(98    |                 <-- pid(1) I/O completed)
+ 98    +---------------- <-- pid(1) start
+       | pid(1) running
+ 101   +---------------- <-- pid(1) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     6                48              8               8
+          3     9                58             55              55
+          4     5                73             61              61
+          5     7                81             69              49
+          6     4                83             77              52
+          7     3                84             82              59
+          8     2                90             84              81
+          9     1                95             90              82
+
+
+ Start time: 1, End time: 101
+ CPU utilization: 98.02% | throughput: 0.09(processes/time)
+ Average turnaround time: 69.22
+ Average waiting time: 58.44
+ Average response time: 49.67
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Preemptive Priority schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+ 4     +---------------- <-- pid(8) interrupted
+ 4     +---------------- <-- pid(6) start
+       | pid(6) running
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 44    +---------------- <-- pid(6) terminated
+ 44    +---------------- <-- pid(7) start
+       | pid(7) running
+ 47    +---------------- <-- pid(7) I/O start
+ 47    +---------------- <-- pid(4) start
+       | pid(4) running
+ 51    +---------------- <-- pid(4) I/O start
+ 51    +---------------- <-- pid(9) start
+       | pid(9) running
+ 54    +---------------- <-- pid(9) terminated
+ 54    +---------------- <-- pid(3) start
+       | pid(3) running
+ 55    +---------------- <-- pid(3) I/O start
+ 55    +---------------- <-- pid(5) start
+       | pid(5) running
+(56    |                 <-- pid(7) I/O completed)
+ 56    +---------------- <-- pid(5) interrupted
+ 56    +---------------- <-- pid(7) start
+       | pid(7) running
+ 65    +---------------- <-- pid(7) terminated
+ 65    +---------------- <-- pid(5) start
+       | pid(5) running
+(71    |                 <-- pid(4) I/O completed)
+ 71    +---------------- <-- pid(5) interrupted
+ 71    +---------------- <-- pid(4) start
+       | pid(4) running
+(73    |                 <-- pid(3) I/O completed)
+ 73    +---------------- <-- pid(4) terminated
+ 73    +---------------- <-- pid(3) start
+       | pid(3) running
+ 74    +---------------- <-- pid(3) terminated
+ 74    +---------------- <-- pid(5) start
+       | pid(5) running
+ 79    +---------------- <-- pid(5) terminated
+ 79    +---------------- <-- pid(8) start
+       | pid(8) running
+ 87    +---------------- <-- pid(8) terminated
+ 87    +---------------- <-- pid(2) start
+       | pid(2) running
+ 88    +---------------- <-- pid(2) I/O start
+ 88    +---------------- <-- pid(1) start
+       | pid(1) running
+ 90    +---------------- <-- pid(1) I/O start
+       | idle
+(91    |                 <-- pid(2) I/O completed)
+ 91    +---------------- <-- pid(2) start
+       | pid(2) running
+ 96    +---------------- <-- pid(2) terminated
+       | idle
+(98    |                 <-- pid(1) I/O completed)
+ 98    +---------------- <-- pid(1) start
+       | pid(1) running
+ 101   +---------------- <-- pid(1) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     6                40              0               0
+          2     9                50             47              47
+          3     7                62             50              41
+          4     4                70             64              44
+          5     3                71             69              51
+          6     5                77             65              53
+          7     8                86             75               0
+          8     2                90             84              81
+          9     1                95             90              82
+
+
+ Start time: 1, End time: 101
+ CPU utilization: 98.02% | throughput: 0.09(processes/time)
+ Average turnaround time: 71.22
+ Average waiting time: 60.44
+ Average response time: 44.33
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<RR (Round Robin) schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 7     +---------------- <-- pid(8) interrupted
+ 7     +---------------- <-- pid(5) start
+       | pid(5) running
+ 13    +---------------- <-- pid(5) interrupted
+ 13    +---------------- <-- pid(7) start
+       | pid(7) running
+ 16    +---------------- <-- pid(7) I/O start
+ 16    +---------------- <-- pid(4) start
+       | pid(4) running
+ 20    +---------------- <-- pid(4) I/O start
+ 20    +---------------- <-- pid(3) start
+       | pid(3) running
+ 21    +---------------- <-- pid(3) I/O start
+ 21    +---------------- <-- pid(6) start
+       | pid(6) running
+(25    |                 <-- pid(7) I/O completed)
+ 27    +---------------- <-- pid(6) interrupted
+ 27    +---------------- <-- pid(9) start
+       | pid(9) running
+ 30    +---------------- <-- pid(9) terminated
+ 30    +---------------- <-- pid(2) start
+       | pid(2) running
+ 31    +---------------- <-- pid(2) I/O start
+ 31    +---------------- <-- pid(1) start
+       | pid(1) running
+ 33    +---------------- <-- pid(1) I/O start
+ 33    +---------------- <-- pid(8) start
+       | pid(8) running
+ 38    +---------------- <-- pid(8) terminated
+ 38    +---------------- <-- pid(5) start
+       | pid(5) running
+(40    |                 <-- pid(4) I/O completed)
+ 44    +---------------- <-- pid(5) terminated
+ 44    +---------------- <-- pid(7) start
+       | pid(7) running
+(42    |                 <-- pid(3) I/O completed)
+ 50    +---------------- <-- pid(7) interrupted
+ 50    +---------------- <-- pid(6) start
+       | pid(6) running
+(45    |                 <-- pid(2) I/O completed)
+ 56    +---------------- <-- pid(6) interrupted
+ 56    +---------------- <-- pid(4) start
+       | pid(4) running
+(52    |                 <-- pid(1) I/O completed)
+ 58    +---------------- <-- pid(4) terminated
+ 58    +---------------- <-- pid(3) start
+       | pid(3) running
+ 59    +---------------- <-- pid(3) terminated
+ 59    +---------------- <-- pid(7) start
+       | pid(7) running
+ 62    +---------------- <-- pid(7) terminated
+ 62    +---------------- <-- pid(2) start
+       | pid(2) running
+ 67    +---------------- <-- pid(2) terminated
+ 67    +---------------- <-- pid(6) start
+       | pid(6) running
+ 73    +---------------- <-- pid(6) interrupted
+ 73    +---------------- <-- pid(1) start
+       | pid(1) running
+ 76    +---------------- <-- pid(1) terminated
+ 76    +---------------- <-- pid(6) start
+       | pid(6) running
+ 82    +---------------- <-- pid(6) interrupted
+ 82    +---------------- <-- pid(6) start
+       | pid(6) running
+ 88    +---------------- <-- pid(6) interrupted
+ 88    +---------------- <-- pid(6) start
+       | pid(6) running
+ 94    +---------------- <-- pid(6) interrupted
+ 94    +---------------- <-- pid(6) start
+       | pid(6) running
+ 98    +---------------- <-- pid(6) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     9                26             23              23
+          2     8                37             26               0
+          3     5                42             30               5
+          4     4                55             49              13
+          5     3                56             54              17
+          6     7                59             47              10
+          7     2                61             55              24
+          8     1                70             65              25
+          9     6                94             54              17
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 55.56
+ Average waiting time: 44.78
+ Average response time: 14.89
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Lottery schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 7     +---------------- <-- pid(8) interrupted
+ 7     +---------------- <-- pid(1) start
+       | pid(1) running
+ 9     +---------------- <-- pid(1) I/O start
+ 9     +---------------- <-- pid(9) start
+       | pid(9) running
+ 12    +---------------- <-- pid(9) terminated
+ 12    +---------------- <-- pid(8) start
+       | pid(8) running
+(16    |                 <-- pid(1) I/O completed)
+ 17    +---------------- <-- pid(8) terminated
+ 17    +---------------- <-- pid(5) start
+       | pid(5) running
+ 23    +---------------- <-- pid(5) interrupted
+ 23    +---------------- <-- pid(4) start
+       | pid(4) running
+ 27    +---------------- <-- pid(4) I/O start
+ 27    +---------------- <-- pid(2) start
+       | pid(2) running
+ 28    +---------------- <-- pid(2) I/O start
+ 28    +---------------- <-- pid(6) start
+       | pid(6) running
+ 34    +---------------- <-- pid(6) interrupted
+ 34    +---------------- <-- pid(1) start
+       | pid(1) running
+ 37    +---------------- <-- pid(1) terminated
+ 37    +---------------- <-- pid(7) start
+       | pid(7) running
+ 40    +---------------- <-- pid(7) I/O start
+ 40    +---------------- <-- pid(5) start
+       | pid(5) running
+(42    |                 <-- pid(4) I/O completed)
+ 46    +---------------- <-- pid(5) terminated
+ 46    +---------------- <-- pid(3) start
+       | pid(3) running
+(45    |                 <-- pid(2) I/O completed)
+ 47    +---------------- <-- pid(3) I/O start
+ 47    +---------------- <-- pid(2) start
+       | pid(2) running
+ 52    +---------------- <-- pid(2) terminated
+ 52    +---------------- <-- pid(4) start
+       | pid(4) running
+(54    |                 <-- pid(7) I/O completed)
+ 54    +---------------- <-- pid(4) terminated
+ 54    +---------------- <-- pid(6) start
+       | pid(6) running
+(56    |                 <-- pid(3) I/O completed)
+ 60    +---------------- <-- pid(6) interrupted
+ 60    +---------------- <-- pid(3) start
+       | pid(3) running
+ 61    +---------------- <-- pid(3) terminated
+ 61    +---------------- <-- pid(7) start
+       | pid(7) running
+ 67    +---------------- <-- pid(7) interrupted
+ 67    +---------------- <-- pid(6) start
+       | pid(6) running
+ 73    +---------------- <-- pid(6) interrupted
+ 73    +---------------- <-- pid(7) start
+       | pid(7) running
+ 76    +---------------- <-- pid(7) terminated
+ 76    +---------------- <-- pid(6) start
+       | pid(6) running
+ 82    +---------------- <-- pid(6) interrupted
+ 82    +---------------- <-- pid(6) start
+       | pid(6) running
+ 88    +---------------- <-- pid(6) interrupted
+ 88    +---------------- <-- pid(6) start
+       | pid(6) running
+ 94    +---------------- <-- pid(6) interrupted
+ 94    +---------------- <-- pid(6) start
+       | pid(6) running
+ 98    +---------------- <-- pid(6) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     9                 8              5               5
+          2     8                16              5               0
+          3     1                31             26               1
+          4     5                44             32              15
+          5     2                46             40              21
+          6     4                51             45              20
+          7     3                58             56              43
+          8     7                73             61              34
+          9     6                94             54              24
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 46.78
+ Average waiting time: 36.00
+ Average response time: 18.11
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<HRN (Highest Response-Rate Next) schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(3) start
+       | pid(3) running
+ 13    +---------------- <-- pid(3) I/O start
+ 13    +---------------- <-- pid(9) start
+       | pid(9) running
+(15    |                 <-- pid(3) I/O completed)
+ 16    +---------------- <-- pid(9) terminated
+ 16    +---------------- <-- pid(3) start
+       | pid(3) running
+ 17    +---------------- <-- pid(3) terminated
+ 17    +---------------- <-- pid(4) start
+       | pid(4) running
+ 21    +---------------- <-- pid(4) I/O start
+ 21    +---------------- <-- pid(1) start
+       | pid(1) running
+ 23    +---------------- <-- pid(1) I/O start
+ 23    +---------------- <-- pid(2) start
+       | pid(2) running
+ 24    +---------------- <-- pid(2) I/O start
+ 24    +---------------- <-- pid(5) start
+       | pid(5) running
+(36    |                 <-- pid(4) I/O completed)
+ 36    +---------------- <-- pid(5) terminated
+ 36    +---------------- <-- pid(4) start
+       | pid(4) running
+ 36    +---------------- <-- pid(4) I/O start
+ 36    +---------------- <-- pid(7) start
+       | pid(7) running
+ 39    +---------------- <-- pid(7) I/O start
+ 39    +---------------- <-- pid(6) start
+       | pid(6) running
+(43    |                 <-- pid(1) I/O completed)
+ 79    +---------------- <-- pid(6) terminated
+ 79    +---------------- <-- pid(1) start
+       | pid(1) running
+(46    |                 <-- pid(2) I/O completed)
+ 82    +---------------- <-- pid(1) terminated
+ 82    +---------------- <-- pid(2) start
+       | pid(2) running
+(63    |                 <-- pid(4) I/O completed)
+ 87    +---------------- <-- pid(2) terminated
+ 87    +---------------- <-- pid(4) start
+       | pid(4) running
+(72    |                 <-- pid(7) I/O completed)
+ 88    +---------------- <-- pid(4) I/O start
+ 88    +---------------- <-- pid(7) start
+       | pid(7) running
+ 97    +---------------- <-- pid(7) terminated
+       | idle
+(105   |                 <-- pid(4) I/O completed)
+ 105   +---------------- <-- pid(4) start
+       | pid(4) running
+ 106   +---------------- <-- pid(4) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     9                12              9               9
+          3     3                14             12               9
+          4     5                34             22              22
+          5     6                75             35              35
+          6     1                76             71              15
+          7     2                81             75              17
+          8     7                94             82              33
+          9     4               103             97              14
+
+
+ Start time: 1, End time: 106
+ CPU utilization: 92.45% | throughput: 0.09(processes/time)
+ Average turnaround time: 55.56
+ Average waiting time: 44.78
+ Average response time: 17.11
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Multilevel Queue schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(7) start
+       | pid(7) running
+ 15    +---------------- <-- pid(7) I/O start
+ 15    +---------------- <-- pid(4) start
+       | pid(4) running
+ 19    +---------------- <-- pid(4) I/O start
+ 19    +---------------- <-- pid(6) start
+       | pid(6) running
+(24    |                 <-- pid(7) I/O completed)
+ 25    +---------------- <-- pid(6) interrupted
+ 25    +---------------- <-- pid(7) start
+       | pid(7) running
+ 31    +---------------- <-- pid(7) interrupted
+ 31    +---------------- <-- pid(6) start
+       | pid(6) running
+ 37    +---------------- <-- pid(6) interrupted
+ 37    +---------------- <-- pid(7) start
+       | pid(7) running
+(39    |                 <-- pid(4) I/O completed)
+ 40    +---------------- <-- pid(7) terminated
+ 40    +---------------- <-- pid(6) start
+       | pid(6) running
+ 46    +---------------- <-- pid(6) interrupted
+ 46    +---------------- <-- pid(4) start
+       | pid(4) running
+ 48    +---------------- <-- pid(4) terminated
+ 48    +---------------- <-- pid(6) start
+       | pid(6) running
+ 54    +---------------- <-- pid(6) interrupted
+ 54    +---------------- <-- pid(6) start
+       | pid(6) running
+ 60    +---------------- <-- pid(6) interrupted
+ 60    +---------------- <-- pid(6) start
+       | pid(6) running
+ 66    +---------------- <-- pid(6) interrupted
+ 66    +---------------- <-- pid(6) start
+       | pid(6) running
+ 70    +---------------- <-- pid(6) terminated
+ 70    +---------------- <-- pid(5) start
+       | pid(5) running
+ 82    +---------------- <-- pid(5) terminated
+ 82    +---------------- <-- pid(3) start
+       | pid(3) running
+ 83    +---------------- <-- pid(3) I/O start
+ 83    +---------------- <-- pid(9) start
+       | pid(9) running
+(85    |                 <-- pid(3) I/O completed)
+ 86    +---------------- <-- pid(9) terminated
+ 86    +---------------- <-- pid(2) start
+       | pid(2) running
+ 87    +---------------- <-- pid(2) I/O start
+ 87    +---------------- <-- pid(1) start
+       | pid(1) running
+ 89    +---------------- <-- pid(1) I/O start
+ 89    +---------------- <-- pid(3) start
+       | pid(3) running
+(90    |                 <-- pid(2) I/O completed)
+ 90    +---------------- <-- pid(3) terminated
+ 90    +---------------- <-- pid(2) start
+       | pid(2) running
+ 95    +---------------- <-- pid(2) terminated
+       | idle
+(97    |                 <-- pid(1) I/O completed)
+ 97    +---------------- <-- pid(1) start
+       | pid(1) running
+ 100   +---------------- <-- pid(1) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     7                37             25               9
+          3     4                45             39              12
+          4     6                66             26              15
+          5     5                80             68              68
+          6     9                82             79              79
+          7     3                87             85              79
+          8     2                89             83              80
+          9     1                94             89              81
+
+
+ Start time: 1, End time: 100
+ CPU utilization: 98.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 65.67
+ Average waiting time: 54.89
+ Average response time: 47.00
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Multilevel Feedback Queue schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(7) start
+       | pid(7) running
+ 15    +---------------- <-- pid(7) I/O start
+ 15    +---------------- <-- pid(4) start
+       | pid(4) running
+ 19    +---------------- <-- pid(4) I/O start
+ 19    +---------------- <-- pid(6) start
+       | pid(6) running
+(24    |                 <-- pid(7) I/O completed)
+ 25    +---------------- <-- pid(6) interrupted
+ 25    +---------------- <-- pid(7) start
+       | pid(7) running
+ 31    +---------------- <-- pid(7) interrupted
+ 31    +---------------- <-- pid(6) start
+       | pid(6) running
+ 37    +---------------- <-- pid(6) interrupted
+ 37    +---------------- <-- pid(7) start
+       | pid(7) running
+(39    |                 <-- pid(4) I/O completed)
+ 40    +---------------- <-- pid(7) terminated
+ 40    +---------------- <-- pid(6) start
+       | pid(6) running
+ 46    +---------------- <-- pid(6) interrupted
+ 46    +---------------- <-- pid(4) start
+       | pid(4) running
+ 48    +---------------- <-- pid(4) terminated
+ 48    +---------------- <-- pid(6) start
+       | pid(6) running
+ 54    +---------------- <-- pid(6) interrupted
+ 54    +---------------- <-- pid(6) start
+       | pid(6) running
+ 60    +---------------- <-- pid(6) interrupted
+ 60    +---------------- <-- pid(6) start
+       | pid(6) running
+ 66    +---------------- <-- pid(6) interrupted
+ 66    +---------------- <-- pid(5) start
+       | pid(5) running
+ 78    +---------------- <-- pid(5) terminated
+ 78    +---------------- <-- pid(3) start
+       | pid(3) running
+ 79    +---------------- <-- pid(3) I/O start
+ 79    +---------------- <-- pid(9) start
+       | pid(9) running
+(81    |                 <-- pid(3) I/O completed)
+ 82    +---------------- <-- pid(9) terminated
+ 82    +---------------- <-- pid(2) start
+       | pid(2) running
+ 83    +---------------- <-- pid(2) I/O start
+ 83    +---------------- <-- pid(1) start
+       | pid(1) running
+ 85    +---------------- <-- pid(1) I/O start
+ 85    +---------------- <-- pid(6) start
+       | pid(6) running
+(86    |                 <-- pid(2) I/O completed)
+ 89    +---------------- <-- pid(6) terminated
+ 89    +---------------- <-- pid(3) start
+       | pid(3) running
+ 90    +---------------- <-- pid(3) terminated
+ 90    +---------------- <-- pid(2) start
+       | pid(2) running
+(93    |                 <-- pid(1) I/O completed)
+ 95    +---------------- <-- pid(2) terminated
+ 95    +---------------- <-- pid(1) start
+       | pid(1) running
+ 98    +---------------- <-- pid(1) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     7                37             25               9
+          3     4                45             39              12
+          4     5                76             64              64
+          5     9                78             75              75
+          6     6                85             45              15
+          7     3                87             85              75
+          8     2                89             83              76
+          9     1                92             87              77
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 66.67
+ Average waiting time: 55.89
+ Average response time: 44.78
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<NonPreemptive LIF (Longest I/O First) schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 12    +---------------- <-- pid(8) terminated
+ 12    +---------------- <-- pid(4) start
+       | pid(4) running
+ 16    +---------------- <-- pid(4) I/O start
+ 16    +---------------- <-- pid(7) start
+       | pid(7) running
+ 19    +---------------- <-- pid(7) I/O start
+ 19    +---------------- <-- pid(1) start
+       | pid(1) running
+ 21    +---------------- <-- pid(1) I/O start
+ 21    +---------------- <-- pid(2) start
+       | pid(2) running
+ 22    +---------------- <-- pid(2) I/O start
+ 22    +---------------- <-- pid(3) start
+       | pid(3) running
+ 23    +---------------- <-- pid(3) I/O start
+ 23    +---------------- <-- pid(9) start
+       | pid(9) running
+ 26    +---------------- <-- pid(9) terminated
+ 26    +---------------- <-- pid(5) start
+       | pid(5) running
+(31    |                 <-- pid(4) I/O completed)
+ 38    +---------------- <-- pid(5) terminated
+ 38    +---------------- <-- pid(4) start
+       | pid(4) running
+(40    |                 <-- pid(7) I/O completed)
+ 40    +---------------- <-- pid(4) terminated
+ 40    +---------------- <-- pid(7) start
+       | pid(7) running
+(47    |                 <-- pid(1) I/O completed)
+ 49    +---------------- <-- pid(7) terminated
+ 49    +---------------- <-- pid(1) start
+       | pid(1) running
+(50    |                 <-- pid(2) I/O completed)
+ 52    +---------------- <-- pid(1) terminated
+ 52    +---------------- <-- pid(2) start
+       | pid(2) running
+(52    |                 <-- pid(3) I/O completed)
+ 57    +---------------- <-- pid(2) terminated
+ 57    +---------------- <-- pid(3) start
+       | pid(3) running
+ 58    +---------------- <-- pid(3) terminated
+ 58    +---------------- <-- pid(6) start
+       | pid(6) running
+ 98    +---------------- <-- pid(6) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     8                11              0               0
+          2     9                22             19              19
+          3     5                36             24              24
+          4     4                37             31               9
+          5     7                46             34              13
+          6     1                46             41              13
+          7     2                51             45              15
+          8     3                55             53              19
+          9     6                94             54              54
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 44.22
+ Average waiting time: 33.44
+ Average response time: 18.44
+
+---------------------<Job queue list>---------------------
+process(1): pid(8), cpu_burst(11), io_burst(0), arrival_time(1), priority(7), io_burst_start(0)
+process(2): pid(5), cpu_burst(12), io_burst(0), arrival_time(2), priority(6), io_burst_start(0)
+process(3): pid(7), cpu_burst(12), io_burst(9), arrival_time(3), priority(2), io_burst_start(3)
+process(4): pid(4), cpu_burst(6), io_burst(15), arrival_time(3), priority(3), io_burst_start(4)
+process(5): pid(3), cpu_burst(2), io_burst(2), arrival_time(3), priority(5), io_burst_start(1)
+process(6): pid(6), cpu_burst(40), io_burst(0), arrival_time(4), priority(1), io_burst_start(0)
+process(7): pid(9), cpu_burst(3), io_burst(0), arrival_time(4), priority(4), io_burst_start(0)
+process(8): pid(2), cpu_burst(6), io_burst(3), arrival_time(6), priority(8), io_burst_start(1)
+process(9): pid(1), cpu_burst(5), io_burst(7), arrival_time(6), priority(9), io_burst_start(2)
+
+-----------------------<Preemptive LIF (Longest I/O First) schedule start>-----------------------
+ 0     +---------------- <-- Scheduling wait
+ 1     +---------------- <-- Scheduling start
+(1     |                 <-- pid(8) admitted)
+ 1     +---------------- <-- pid(8) start
+       | pid(8) running
+(2     |                 <-- pid(5) admitted)
+(3     |                 <-- pid(7) admitted)
+(3     |                 <-- pid(4) admitted)
+(3     |                 <-- pid(3) admitted)
+ 3     +---------------- <-- pid(8) interrupted
+ 3     +---------------- <-- pid(4) start
+       | pid(4) running
+(4     |                 <-- pid(6) admitted)
+(4     |                 <-- pid(9) admitted)
+ 4     +---------------- <-- pid(4) interrupted
+ 4     +---------------- <-- pid(4) start
+       | pid(4) running
+(6     |                 <-- pid(2) admitted)
+(6     |                 <-- pid(1) admitted)
+ 8     +---------------- <-- pid(4) I/O start
+ 8     +---------------- <-- pid(7) start
+       | pid(7) running
+ 11    +---------------- <-- pid(7) I/O start
+ 11    +---------------- <-- pid(1) start
+       | pid(1) running
+ 13    +---------------- <-- pid(1) I/O start
+ 13    +---------------- <-- pid(2) start
+       | pid(2) running
+ 14    +---------------- <-- pid(2) I/O start
+ 14    +---------------- <-- pid(3) start
+       | pid(3) running
+ 15    +---------------- <-- pid(3) I/O start
+ 15    +---------------- <-- pid(9) start
+       | pid(9) running
+ 18    +---------------- <-- pid(9) terminated
+ 18    +---------------- <-- pid(8) start
+       | pid(8) running
+(23    |                 <-- pid(4) I/O completed)
+ 23    +---------------- <-- pid(8) interrupted
+ 23    +---------------- <-- pid(4) start
+       | pid(4) running
+ 24    +---------------- <-- pid(4) terminated
+ 24    +---------------- <-- pid(8) start
+       | pid(8) running
+ 28    +---------------- <-- pid(8) terminated
+ 28    +---------------- <-- pid(5) start
+       | pid(5) running
+(32    |                 <-- pid(7) I/O completed)
+ 40    +---------------- <-- pid(5) terminated
+ 40    +---------------- <-- pid(7) start
+       | pid(7) running
+(39    |                 <-- pid(1) I/O completed)
+ 39    +---------------- <-- pid(7) interrupted
+ 39    +---------------- <-- pid(1) start
+       | pid(1) running
+(42    |                 <-- pid(2) I/O completed)
+ 42    +---------------- <-- pid(1) terminated
+ 42    +---------------- <-- pid(2) start
+       | pid(2) running
+(44    |                 <-- pid(3) I/O completed)
+ 44    +---------------- <-- pid(2) interrupted
+ 44    +---------------- <-- pid(3) start
+       | pid(3) running
+ 45    +---------------- <-- pid(3) terminated
+ 45    +---------------- <-- pid(2) start
+       | pid(2) running
+ 48    +---------------- <-- pid(2) terminated
+ 48    +---------------- <-- pid(7) start
+       | pid(7) running
+ 58    +---------------- <-- pid(7) terminated
+ 58    +---------------- <-- pid(6) start
+       | pid(6) running
+ 98    +---------------- <-- pid(6) terminated
+
+ all processes terminated.
+
+ ===========================<evalution>===========================
+
+ terminated   pid   turnaround time   waiting time   response time
+ -----------------------------------------------------------------
+          1     9                14             11              11
+          2     4                21             15               0
+          3     8                27             16               0
+          4     5                38             26              26
+          5     1                36             31               5
+          6     3                42             40              11
+          7     2                42             36               7
+          8     7                55             43               5
+          9     6                94             54              54
+
+
+ Start time: 1, End time: 98
+ CPU utilization: 100.00% | throughput: 0.09(processes/time)
+ Average turnaround time: 41.00
+ Average waiting time: 30.22
+ Average response time: 13.22

@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "config.h": "c",
+        "simulation.h": "c",
+        "array": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "schedulings.h": "c",
+        "processes.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
