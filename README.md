@@ -1,7 +1,7 @@
 # CPU_Scheduler
 CPU Scheduling Simulation, and Evaluation
 
-12 kinds of CPU schedulings are included
+12 kinds of CPU schedulings are included.
 
    usage:
 
@@ -25,5 +25,6 @@ gcc
 
 # getting started
 gcc main.c -o main.out
+
 ./main.out
 
