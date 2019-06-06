@@ -59,9 +59,11 @@ void simulate(int n_process, int scheduling_type, int time_quantum){
     print_all_processes(jobQueue, n_process_jobQueue);
 
     printf("\n-----------------------<%s schedule start>-----------------------\n", num2string(scheduling_type));
-    printf(" %-4d  +---------------- <-- Scheduling wait\n", t);
     t = jobQueue[0]->arrival_time; // earliest_arrival_time
     scheduling_start_time = t;
+    for (int i=0; i<t; i++){ // print time for every time
+        printf(" %-4d  +---------------- <-- Scheduling wait\n", i);
+    }
     printf(" %-4d  +---------------- <-- Scheduling start\n", t);
     
     // Scheduling

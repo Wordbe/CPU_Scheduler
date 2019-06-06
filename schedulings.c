@@ -6,8 +6,15 @@ ProcessPtr crp; // crp : Current Running Process
 
 int prev_time; // prev_time of t
 int next_time; // next_time of t
+int pt; // prev time for printing time
+int nt; // next time for printing time
 
-
+void time_print(int time_from, int time_to){
+    for (int i = time_from; i < time_to; i++){
+        // printf(" %-4d  | pid(%d) running\n", i, crp->pid);
+        printf(" %-4d  | pid() running\n", i);
+    }
+}
 
 bool _check_io_terminated(){
     /*
@@ -375,12 +382,15 @@ void execute_FCFS(int n_process){
             // CPU scheduling
             crp = pop_readyQueue();
 
+            if (crp->io_burst_remaining == 0){
+                _random_io_occur(10); // 1/10 확률로 io 발생
+            }
+
             // 3.1 running -> waiting
             if (crp->io_burst_remaining > 0){
                 printf(" %-4d  +---------------- <-- pid(%d) start\n", t, crp->pid);
                 printf("       | pid(%d) running\n", crp->pid);
                 if (crp->response_time == -1) crp->response_time = t - crp->arrival_time;
-
                 t += crp->io_burst_start;
                 crp->actual_io_burst_start = t;
                 job_schedule();
@@ -877,7 +887,7 @@ void execute_Loterry(int n_process, int time_quantum){
 
             // 추첨
             srand((unsigned int)time(NULL));
-            int win_num = rand() % sum;
+            int win_num = rand() % sum; // 전체 티켓에서 하나의 당첨 번호를 뽑는다.
             for (int i=0; i<n_process_readyQueue; i++){
                 if (readyQueue[i]->priority == lottery[win_num]){
                     crp = pop_nth_readyQueue(i);
@@ -1034,7 +1044,7 @@ void execute_MLQ(int n_process, int time_quantum, int priority_criteria){
         if (n_process_fg_readyQueue <= 0 && n_process_bg_readyQueue <= 0){ // 모든 ready queue 비었을 때
             _idle_manage_MLQ(priority_criteria);
         }
-        // 3.1 background (FCFS)에서 running
+        // 3 background (FCFS)에서 running
         else if (n_process_fg_readyQueue == 0 && n_process_bg_readyQueue > 0){ // background ready queue만 차있을 때
             crp = pop_bg_readyQueue();
 
@@ -1071,11 +1081,11 @@ void execute_MLQ(int n_process, int time_quantum, int priority_criteria){
                 push_terminatedQueue(crp); // crp: running state -> terminated queue
             }
         }
-        // 3.2 foreground (Round Robin)에서 running
+        // 4 foreground (Round Robin)에서 running
         else {
             crp = pop_fg_readyQueue();
 
-            // 3.1 running -> waiting
+            // 4.1 running -> waiting
             if (crp->io_burst_remaining > 0){
                 printf(" %-4d  +---------------- <-- pid(%d) start\n", t, crp->pid);
                 printf("       | pid(%d) running\n", crp->pid);
@@ -1103,7 +1113,7 @@ void execute_MLQ(int n_process, int time_quantum, int priority_criteria){
                 }
                 
             }
-            // 3.2 running -> terminated
+            // 4.2 running -> terminated
             else{
                 printf(" %-4d  +---------------- <-- pid(%d) start\n", t, crp->pid);
                 printf("       | pid(%d) running\n", crp->pid);
