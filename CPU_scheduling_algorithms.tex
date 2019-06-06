@@ -1,0 +1,437 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{kotex}
+
+% \usepackage{algorithmic}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{epsfig}
+
+
+\begin{document}
+
+
+
+\begin{algorithm} [H]
+    \SetAlgoLined
+    \KwResult{ Scheduled by first-come, first-served}
+    time 0으로 초기화\;
+    가장 이른 arrival time을 가진 프로세스들은 ready queue에 들어온다\;
+    Time update\;
+    \While{infinite}{
+      \uIf{ready queue, waiting queue가 다 비었고, 
+      terminated queue에 모든 프로세스가 도착했다면}{
+      // 1. 스케쥴링 종료\;
+      break\;
+      }
+      \uElseIf{ready queue에 프로세스가 없다면}{
+      // 2. Idle 상태\;
+      Time update\;
+      job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+      }
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue를 arrival time 순으로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        Time update\;
+        job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+        crp의 cpu burst remaining time update\;
+        push waitingQueue(crp)\;
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        Time update\;
+        job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+        crp의 cpu burst remaining time에 0 할당\;
+        crp의 turnaround time update\;
+        crp의 waiting time update\;
+        push terminated Queue(crp)\;
+      }
+      }
+    }
+\caption{FCFS}
+\end{algorithm}
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by shortest job first Non-preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      
+      \underline{ready queue를 cpu burst remaining time로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      ...\\
+      }
+    }
+\caption{SJF Non-preemptive}
+\end{algorithm}
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by shortest job first preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue를 cpu burst remaining time로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        
+        \uIf{next time에 crp보다 높은 우선순위의 프로세스가 있으면}{
+            \underline{// 3.1.1 running → ready(preempted)}\;
+            push readyQueue(crp)\;
+            
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+        }
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        Time update\;
+        job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+        crp의 cpu burst remaining time에 0 할당\;
+        crp의 turnaround time update\;
+        crp의 waiting time update\;
+        push terminated Queue(crp)\;
+      }
+      }
+    }
+\caption{SJF Preemptive}
+\end{algorithm}
+
+
+
+
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by shortest job first Non-preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      
+      \underline{ready queue를 priority 순으로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      ...\\
+      }
+    }
+\caption{Priority Non-preemptive}
+\end{algorithm}
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by shortest job first preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue를 priority순으로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        
+        \uIf{next time에 crp보다 높은 우선순위의 프로세스가 있으면}{
+            \underline{// 3.1.1 running → ready(preempted)}\;
+            push readyQueue(crp)\;
+            
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+        }
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        Time update\;
+        job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+        crp의 cpu burst remaining time에 0 할당\;
+        crp의 turnaround time update\;
+        crp의 waiting time update\;
+        push terminated Queue(crp)\;
+      }
+      }
+    }
+\caption{Priority Preemptive}
+\end{algorithm}
+
+
+
+
+
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by Round Robin and executed during time quantum}
+    ...\\
+    \Else{
+      // 3. Running 상태\;
+      \underline{ready queue를 arrival time 순으로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        \uIf{\underline{I/O burst start time이 time quantum보다 크면}}{
+            I/O burst start time 갱신\;
+            CPU burst remaining time 갱신\;
+            Time update;
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+        }
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        \uIf{\underline{CPU burst remaining time이 time quantum보다 크면}}{
+            CPU burst remaining time 갱신\;
+            Time update;
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time에 0 할당\;
+            crp의 turnaround time update\;
+            crp의 waiting time update\;
+            push terminated Queue(crp)\;
+        }
+      }
+      }
+    }
+\caption{Round Robin}
+\end{algorithm}
+
+
+
+
+
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by Lottery and executed during time quantum}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{Lottery ticket을 나누어주고, 추첨하여 하나의 프로세스 선정}\;
+      pop readyQueue 실행하여 crp(currently running process)에 당첨된 프로세스를 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        \uIf{\underline{I/O burst start time이 time quantum보다 크면}}{
+            I/O burst start time 갱신\;
+            CPU burst remaining time 갱신\;
+            Time update;
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+        }
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        \uIf{\underline{CPU burst remaining time이 time quantum보다 크면}}{
+            CPU burst remaining time 갱신\;
+            Time update;
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time에 0 할당\;
+            crp의 turnaround time update\;
+            crp의 waiting time update\;
+            push terminated Queue(crp)\;
+        }
+      }
+      }
+    }
+\caption{Lottery}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by shortest job first Non-preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue에 있는 각 프로세스의 DP, 즉 (대기시간 + 실행시간)/실행시간을 구함}\;
+      \underline{DP가 가장 높은 프로세스를 ready queue앞에 정렬(Aging)}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      ...\\
+      }
+    }
+\caption{HRN, Highest Response-Rate Next}
+\end{algorithm}
+
+
+
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by using multi-level queue}
+    time 0으로 초기화\;
+    가장 이른 arrival time을 가진 프로세스들은 ready queue에 들어온다\;
+    Time update\;
+    \While{infinite}{
+      \uIf{\underline{모든 ready queue, waiting queue가 다 비었고,}\ 
+      \underline{terminated queue에 모든 프로세스가 도착했다면}}{
+      // 1. 스케쥴링 종료\;
+      break\;
+      }
+      \uElseIf{ready queue에 프로세스가 없다면}{
+          // 2. Idle 상태\;
+          Time update\;
+          \underline{job queue 또는 waiting queue에서 다음 프로세스를 우선순위에 맞게 ready queue로 가져온다};
+          }
+      \uElseIf{\underline{foreground ready queue는 비었고, background에는 프로세스가 있을 때}}{
+          // 3. Running 상태(Background)\;
+          \underline{ready queue를 arrival time 순으로 정렬}\;
+          pop readyQueue 실행하여 crp(currently running process)에 할당\;
+          \uIf{I/O가 실행되면}{
+          // 3.1 Running → waiting\;
+            Time update\;
+            \underline{job queue 또는 waiting queue에서 다음 프로세스를 Background ready queue로 가져온다};
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+          }
+          \Else{
+          // 3.2 Running → terminated\;
+            ...\\
+            }
+        }
+      \Else{
+          // 4. Running 상태(foreground)\;
+          \underline{ready queue를 arrival time 순으로 정렬}\;
+          pop readyQueue 실행하여 crp(currently running process)에 할당\;
+          \uIf{I/O가 실행되면}{
+          // 4.1 Running → waiting\;
+            Time update\;
+            \underline{job queue 또는 waiting queue에서 다음 프로세스를 foreground ready queue로 가져온다};
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+          }
+          \Else{
+          // 4.2 Running → terminated\;
+            ...\\
+          }
+      }
+    }
+\caption{Multi-level Queue}
+\end{algorithm}
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled using multi-level feedback ready queue}
+    ...\\
+      \uElseIf{\underline{foreground ready queue는 비었고, background에는 프로세스가 있을 때}}{
+          // 3. Running 상태(Background)\;
+          \underline{대기시간이 aging condition보다 높은 프로세스는}\ 
+          \underline{Background에서 Foreground ready queue로 이동한다.}\;
+          \underline{ready queue를 arrival time 순으로 정렬}\;
+          pop readyQueue 실행하여 crp(currently running process)에 할당\;
+          ...\\
+      }
+      \Else{
+          // 4. Running 상태(foreground)\;
+          \underline{소모한 CPU burst가 demote condition보다 높은 프로세스는}\ 
+          \underline{foreground에서 background ready queue로 이동한다.}\;
+          \underline{ready queue를 arrival time 순으로 정렬}\;
+          pop readyQueue 실행하여 crp(currently running process)에 할당\;
+          ...\\
+      }
+    }
+\caption{Multi-level Feedback Queue}
+\end{algorithm}
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by longest i/o first non-preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue에 I/O를 실행하는 프로세스가 있다면}\ 
+      \underline{I/O burst가 긴 프로세스를 앞에서부터 순서대로 정렬}\;
+      \underline{ready queue를 cpu burst remaining time로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      ...\\
+      }
+    }
+\caption{LIF Non-preemptive}
+\end{algorithm}
+
+
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwResult{ Scheduled by longest i/o first preemptively}
+    ...\\
+      \Else{
+      // 3. Running 상태\;
+      \underline{ready queue에 I/O를 실행하는 프로세스가 있다면}\ 
+      \underline{I/O burst가 긴 프로세스를 앞에서부터 순서대로 정렬}
+      \underline{ready queue를 cpu burst remaining time로 정렬}\;
+      pop readyQueue 실행하여 crp(currently running process)에 할당\;
+      \uIf{I/O가 실행되면}{
+      // 3.1 Running → waiting\;
+        
+        \uIf{next time에 crp보다 높은 우선순위의 프로세스가 있으면}{
+            \underline{// 3.1.1 running → ready(preempted)}\;
+            push readyQueue(crp)\;
+            
+        }
+        \Else{
+            Time update\;
+            job queue 또는 waiting queue에서 다음 프로세스를 ready queue로 가져온다\;
+            crp의 cpu burst remaining time update\;
+            push waitingQueue(crp)\;
+        }
+      }
+      \Else{
+      // 3.2 Running → terminated\;
+        ...\\
+      }
+      }
+    }
+\caption{LIF Preemptive}
+\end{algorithm}
+
+
+
+
+
+\end{document}
