@@ -24,7 +24,7 @@ CPU Scheduling Simulation, and Evaluation
 gcc
 
 # getting started
-gcc main.c -o main.out
+gcc main.c simulate.c create_test_processes.c -o main.out
 
 ./main.out
 
